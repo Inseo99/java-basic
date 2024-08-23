@@ -4,15 +4,9 @@ public class Exam5 {
     public static void main(String[] args) {
         // 문제 : 1부터 100까지 출력해주세요.
 
-//        int count = 1;
-//        while (count <= 100) {
-//            System.out.println(count);
-//            count++;
-//        }
-//
-//        for (int i = 1; i <= 100; i++) {
-//            System.out.println(i);
-//        }
+        for (int i = 1; i <= 100; i++) {
+            System.out.println(i);
+        }
 
         // 문제1. 1 ~ 100까지 수중 짝수만 출력
 
@@ -51,13 +45,31 @@ public class Exam5 {
 
         while (time < 90) {
             score++;
-            time = 5*(score - 1) + time;
+            time = 5 * (score - 1) + time;
             System.out.println(score);
         }
 
         // 출력 : 4
 
+        // a b 두 수가 주어지면 a와 b사이의 수를 오름차순 출력해주세요.
+        // 오름차순은 작은 수 부터 큰수로 정렬되는 것을 말합니다.
+        // ex )
+        // 오름차순 :  1, 2, 3, 4, 5
+        // 내림차순 :  5, 4, 3, 2, 1
 
+        int a = 16;
+        int b = 12;
+
+        if (a < b) {
+            for (int i = a + 1; i < b; i++) {
+                System.out.println(i);
+            }
+        }
+        if (a > b) {
+            for (int i = b + 1; i < a; i++) {
+                System.out.println(i);
+            }
+        }
 
 
     }
