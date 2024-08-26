@@ -32,6 +32,7 @@ public class Exam2 {
         }
 
         // 문제
+        // 배열 안의 숫자들의 합을 구해주세요.
 		/*
 		// 아래 4줄은 위 1줄과 같은 의미 입니다.
 		int[] arr = new int[5];
@@ -43,6 +44,13 @@ public class Exam2 {
 		*/
         int[] arr3 = {10, 20, 30, 40, 50};
 
+        int sum = 0;
+
+        for(int i = 0; i < arr3.length; i++) {
+            sum += arr3[i];
+        }
+
+        System.out.println(sum);
 
     }
 }
