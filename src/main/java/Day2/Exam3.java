@@ -45,8 +45,14 @@ public class Exam3 {
         // 이름을 입력해주세요 : 홍 길동
         // 출력 : 안녕하세요 29세 홍 길동입니다.
 
-        System.out.println("이름을 입력해주세요: ");
-        String str1 = sc.nextLine();
+        sc.nextLine(); // 줄바꿈을 가져오기위해서
+
+        System.out.print("이름을 입력해주세요: ");
+        String name = sc.nextLine();
+        System.out.print("나이를 입력해주세요: ");
+        int age = sc.nextInt();
+
+        System.out.println("안녕하세요. " + age + "세 " + name + "입니다.");
 
     }
 }
