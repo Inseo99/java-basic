@@ -17,10 +17,10 @@ public class Doubleloop {
         }
 
         // 구구단 만들기
-        for (int x = 1; x < 10 ; x++) {
-            System.out.println("구구단 " + x + "단");
+        for (int j = 1; j < 10 ; j++) {
+            System.out.println("구구단 " + j + "단");
             for (int i = 1; i < 10; i++) {
-                System.out.println(x + " X " + i + " = "+ (x * i));
+                System.out.println(j + " X " + i + " = "+ (j * i));
             }
         }
 
