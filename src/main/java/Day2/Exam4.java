@@ -24,5 +24,35 @@ public class Exam4 {
         Scanner sc = new Scanner(System.in);
 
 
+        while (true) {
+            System.out.print("기능을 선택해주세요 (1. 더하기, 2. 빼기, 3. 곱하기, 4. 나누기, 5. 종료 ) : ");
+            int skill = sc.nextInt();
+            if (skill == 5) {
+                break;
+            }
+            if (skill >= 6) {
+                System.out.println("그런 기능은 존재하지 않습니다.");
+                continue;
+            }
+            System.out.print("첫번째 숫자를 입력해주세요 : ");
+            int num1 = sc.nextInt();
+            System.out.print("두번째 숫자를 입력해주세요 : ");
+            int num2 = sc.nextInt();
+
+            if (skill == 1) {
+                System.out.println("결과: " + num1 + " + " + num2 + " = " + (num1 + num2));
+            }
+            if (skill == 2) {
+                System.out.println("결과: " + num1 + " - " + num2 + " = " + (num1 - num2));
+            }
+            if (skill == 3) {
+                System.out.println("결과: " + num1 + " X " + num2 + " = " + (num1 * num2));
+            }
+            if (skill == 4) {
+                System.out.println("결과: " + num1 + " / " + num2 + " = " + (num1 / num2));
+            }
+        }
+        System.out.println("계산기 프로그램을 종료합니다.");
+
     }
 }
