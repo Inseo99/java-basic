@@ -70,7 +70,13 @@ public class Array {
         System.out.println(arr2.length);
         System.out.println(arr3.length);
 
+        // 중간에 값 저장
         arr3[4] = 10;
+
+        // 숫자 배열 -> 숫자만 저장 가능. 다른 타입은 불가능.
+        int[] arr4 = {1, 2, 3, 4, 5};
+        String[] arr5 = {"apple", "banana", "orange"};
+        boolean[] arr6 = {true, false, false, true};
 
     }
 }
