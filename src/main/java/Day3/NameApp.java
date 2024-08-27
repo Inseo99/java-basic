@@ -19,10 +19,11 @@ public class NameApp {
         // exit : 종료
         // 명령어 입력 : add
         // 이름을 입력해주세요 : john
+        // 나이를 입력해주세요 : 24
         // john이 명부에 저장되었습니다.
         // 명령어 입력 : list
         // ===== 이름 목록 =====
-        // 1. john
+        // 1. john, 24
         // ===================
         // 명령어 입력 : add
         // 이름을 입력해주세요 : tomas
@@ -39,6 +40,7 @@ public class NameApp {
 
         // Arraylist 사용
         ArrayList<String> namelist = new ArrayList<>();
+        ArrayList<Integer> agelist = new ArrayList<>();
 
         while (true) {
             System.out.print("명령어 입력 : ");
@@ -48,21 +50,27 @@ public class NameApp {
                 System.out.print("이름을 입력해주세요 : ");
 
                 // Array 사용
-//                String[] list = new String[namelist.length + 1];
+//                String[] names = new String[namelist.length + 1];
 //                String name = sc.nextLine();
 //
 //                for (int i = 0; i < namelist.length; i++) {
-//                    list[i] = namelist[i];
+//                    names[i] = namelist[i];
 //                }
 //
-//                list [list.length-1] = name;
+//                names[names.length-1] = name;
 //
-//                namelist = name;
+//                namelist = names;
 
 
                 // Arraylist 사용
                 String name = sc.nextLine();
                 namelist.add(name);
+
+                System.out.print("나이를 입력해주세요 : ");
+                int age = sc.nextInt();
+                agelist.add(age);
+
+                sc.nextLine();
 
                 System.out.println(name + "이(가) 명부에 저장되었습니다.");
 
@@ -78,7 +86,7 @@ public class NameApp {
 
                 // Arraylist 사용
                 for (int i = 0 ; i < namelist.size(); i++ ) {
-                    System.out.println((i+1) + ". " + namelist.get(i));
+                    System.out.println((i+1) + ". " + namelist.get(i) + ", " + agelist.get(i));
                 }
 
                 System.out.println("====================");
