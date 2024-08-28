@@ -1,7 +1,6 @@
 package Day3.method;
 
 public class Test {
-    // 메서드를 올바르게 호출해서 아래처럼 출력되게 해주세요.
 
     int age;
     String name;
