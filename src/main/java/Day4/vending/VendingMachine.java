@@ -13,7 +13,7 @@ public class VendingMachine {
     public void inputMoney(int money) {
 //        total = total + money; // 증감연산
         // 증감연산의 경우 짧게 표현하는 방법 존재.
-        total += total; // 위와 같은 코드
+        total += money; // 위와 같은 코드
     }
 
     public String selectBeverage(int choice) {
