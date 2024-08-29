@@ -9,6 +9,7 @@ public class VendingMachineApp {
         int total = 0;
         String[] drink = {"콜라", "사이다", "커피"};
         int[] price = {1000, 1200, 800};
+        int[] count = {2, 3, 4};
 
         while (true) {
             System.out.print("기능 선택 ( 1. 돈 투입, 2. 음료 선택, 3. 음료 목록 확인, 4. 잔액 확인, 5. 사용 종료 : ");
@@ -27,14 +28,19 @@ public class VendingMachineApp {
                     System.out.println("잔액이 부족합니다.");
                     continue;
                 }
+                if (count[num] < 1) {
+                    System.out.println("수량이 부족합니다.");
+                    continue;
+                }
 
                 System.out.println(drink[num] + "를 뽑으셨습니다.");
                 total = total - price[num];
+                count[num] = count[num] - 1;
                 System.out.println("잔액은 " + total + "원입니다.");
             } else if (menu == 3) {
                 System.out.println("== 음료수 목록 ==");
                 for (int i = 0; i < drink.length; i++) {
-                    System.out.println(i + ". " + drink[i] + " : " + price[i] + "원");
+                    System.out.println(i + ". " + drink[i] + " : " + price[i] + "원, " + "남은 수량 : " + count[i]);
                 }
             } else if (menu == 4) {
                 System.out.println("현재 잔액은 " + total + "원입니다.");

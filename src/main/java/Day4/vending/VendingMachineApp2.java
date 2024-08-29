@@ -17,18 +17,21 @@ public class VendingMachineApp2 {
                 System.out.println("현재 투입된 금액은 " + vm.total + "원입니다.");
             }
             else if (menu == 2) {
-
                 System.out.print("음료수를 선택해주세요 : ");
                 int target = Integer.parseInt(sc.nextLine());
                 String beverage = vm.selectBeverage(target);
-                if (vm.total < vm.price[target]) {
+                if(beverage.equals("잔액 부족")){
                     System.out.println("잔액이 부족합니다.");
                     continue;
                 }
-                System.out.println( beverage + "을/를 뽑으셨습니다.");
+                if(beverage.equals("수량 부족")) {
+                    System.out.println("수량이 부족합니다.");
+                    continue;
+                }
+                System.out.println(beverage + "을/를 뽑으셨습니다.");
                 int remainder = vm.getRemainder();
-                System.out.println("잔액은 " + remainder + " 원입니다.");
 
+                System.out.println("잔액은 " + remainder + " 원입니다.");
             }
             else if (menu == 3) {
                 vm.printBeverages();
