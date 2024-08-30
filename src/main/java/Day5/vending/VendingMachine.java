@@ -1,6 +1,7 @@
 package Day5.vending;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class VendingMachine {
 
@@ -8,26 +9,28 @@ public class VendingMachine {
     // 연습용으로 하나의 객체만 사용할 때는 미리 넣어 두는 것이 편하니까 그냥 넣어둠
     int total = 0;
 
-    ArrayList<String> drinks = new ArrayList<String>() {{
+    ArrayList<String> drinks = new ArrayList<>() {{
         add("콜라");
         add("사이다");
         add("커피");
         add("주스");
     }};
 
-    ArrayList<Integer> prices = new ArrayList<Integer>() {{
+    ArrayList<Integer> prices = new ArrayList<>() {{
         add(1000);
         add(1200);
         add(800);
         add(1500);
     }};
 
-    ArrayList<Integer> quantities = new ArrayList<Integer>() {{
+    ArrayList<Integer> quantities = new ArrayList<>() {{
         add(2);
         add(1);
         add(3);
         add(2);
     }};
+
+//    ArrayList<Integer> price = new ArrayList<>(List.of(1000, 1200, 800));
 
     public void inputMoney(int money) {
 //        total = total + money; // 증감연산
