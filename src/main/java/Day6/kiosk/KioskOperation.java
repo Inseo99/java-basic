@@ -109,4 +109,8 @@ public class KioskOperation {
             System.out.println((i+1) + ". " + drinkCart.get(i).name);
         }
     }
+
+    public int getRemainder(int money) {
+        return money - total;
+    }
 }

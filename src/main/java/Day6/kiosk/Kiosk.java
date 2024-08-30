@@ -95,6 +95,20 @@ public class Kiosk {
                     }
                 }
             } else if (menu == 5) {
+                System.out.println("정말 주문하시겠습니까?(y/n) : ");
+                String answer = sc.nextLine();
+                if (answer.equals("y")) {
+                    System.out.println("결제 금액을 입력해주세요 : ");
+                    int money = Integer.parseInt(sc.nextLine());
+                    ko.getRemainder(money);
+                    System.out.println("영수증 발급하시겠습니까?(y/n) : ");
+                    String select = sc.nextLine();
+                    if (select.equals("y")) {
+
+                    }
+                } else if (answer.equals("n")){
+                    continue;
+                }
 
             } else {
                 System.out.println("잘못 선택하셨습니다.");
