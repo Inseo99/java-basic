@@ -8,24 +8,21 @@ public class LeeCorparation {
 //        Kildong kildong = new Jinee();
 
         LeeCorp leeCorp = new LeeCorp();
-        leeCorp.kildong = new Kildong();
+        leeCorp.developer = new Jinee();
         leeCorp.kilsoon = new Kilsoon();
 
         leeCorp.java(); // 자바 프로그래밍
         leeCorp.python(); // 파이썬 프로그래밍
 
-
-
-
     }
 }
 
 class LeeCorp {
-    Kildong kildong;
+    JavaDeveloper developer;
     Kilsoon kilsoon;
 
     public void java() {
-        kildong.java();
+        developer.java();
     }
 
     public void python() {
