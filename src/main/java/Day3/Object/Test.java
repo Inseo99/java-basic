@@ -1,4 +1,4 @@
-package Day3.object;
+package day3.object;
 
 public class Test {
     int num1; // 4

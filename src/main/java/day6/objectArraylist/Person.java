@@ -1,7 +1,7 @@
-package day3.object;
+package day6.objectArraylist;
 
 public class Person {
 
-    int age;
     String name;
+    int age;
 }
