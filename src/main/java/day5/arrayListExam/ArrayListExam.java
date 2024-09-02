@@ -39,7 +39,7 @@ public class ArrayListExam {
         // ================================================
         // 수정
         // 배열
-        arr[0] = 10; // arr 배여릐 0번방의 값을 10을 수정.
+        arr[0] = 10; // arr 배열의 0번방의 값을 10을 수정.
         System.out.println(arr[0]);
 
         // ArrayList
