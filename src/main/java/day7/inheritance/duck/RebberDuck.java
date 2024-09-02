@@ -1,6 +1,7 @@
 package day7.inheritance.duck;
 
 public class RebberDuck extends Duck {
+    // 오버라이딩
     public void fly() {
         System.out.println("저는 날 수 없어요.");
     }

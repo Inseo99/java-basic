@@ -34,7 +34,8 @@ public class Exam {
         RebberDuck rd1 = new RebberDuck();
         rd1.fly();
         rd1.swim();
-        RebberDuck rd2 = new RebberDuck();
+
+        RebberDuck2 rd2 = new RebberDuck2();
         rd2.fly();
         rd2.swim();
 
@@ -43,3 +44,12 @@ public class Exam {
         ad1.swim();
     }
 }
+
+// 상속 ->
+// 부모클래스 - 자식클래스
+// 부모 객체 - 자식객체
+// 상위클래스 - 하위클래스
+
+// 상속의 한계.
+// 객체가 많아지고 상속관계가 복잡해질 수록 중복 해결이 어려워진다.
+// 상속은 잘못사용하면 큰일난다.
