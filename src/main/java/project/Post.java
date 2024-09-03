@@ -2,6 +2,7 @@ package project;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Post {
     private int id;
@@ -10,6 +11,7 @@ public class Post {
     private String time;
     private int views;
 
+    ArrayList<CommentFeature> comments = new ArrayList<>();
 
     public Post(int id, String title, String content, String time) {
         this.id = id;
