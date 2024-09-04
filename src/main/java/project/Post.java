@@ -10,6 +10,7 @@ public class Post {
     private int views;
     private ArrayList<CommentFeature> comments;
     private String user;
+    private ArrayList<Like> likes;
 
     public Post(int id, String title, String content, String time, String user) {
         this.id = id;

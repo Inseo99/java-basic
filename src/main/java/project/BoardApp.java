@@ -10,6 +10,7 @@ public class BoardApp {
     //main 메서드와 findPostById 메서드가 같이 사용해야 하므로 main 밖으로 빼주고 static 붙여줌
     ArrayList<Post> posts = new ArrayList<>();
     ArrayList<User> users = new ArrayList<>();
+    ArrayList<Like> likes = new ArrayList<>();
     User currentUser = null;
 
     // 값의ㅏ 초기화는 대부분 생성자에서 해주는 것을 권장합니다. 다양한 로직 수행 가능합니다.
@@ -167,7 +168,11 @@ public class BoardApp {
                         }
 
                     } else if (feature == 2) {
-                        System.out.println("해당 게시물을 좋아합니다.");
+                        User user = users.get(targetId);
+                        if (!user.likewhether) {
+                            System.out.println("해당 게시물을 좋아합니다.");
+                            user.setLikewhether(true);
+                        }
                         System.out.println("해당 게시물의 좋아요를 해제합니다.");
                     } else if (feature == 3) {
                         if (post.getUser() == currentUser.getName()) {
@@ -236,7 +241,7 @@ public class BoardApp {
                 System.out.print("닉네임을 입력해주세요 : ");
                 String name = sc.nextLine();
 
-                User user = new User(ID, password, name);
+                User user = new User(ID, password, name, false);
                 users.add(user);
 
                 System.out.println("==== 회원가입이 완료되었습니다. ====");
