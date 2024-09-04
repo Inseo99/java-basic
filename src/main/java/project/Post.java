@@ -1,7 +1,5 @@
 package project;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Post {
@@ -10,15 +8,29 @@ public class Post {
     private String content;
     private String time;
     private int views;
+    private ArrayList<CommentFeature> comments;
+    private String user;
 
-    ArrayList<CommentFeature> comments = new ArrayList<>();
-
-    public Post(int id, String title, String content, String time) {
+    public Post(int id, String title, String content, String time, String user) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.time = time;
         this.views = 0;
+        this.comments = new ArrayList<>();
+        this.user = user;
+    }
+
+    public void setComments(ArrayList<CommentFeature> comments) {
+        this.comments = comments;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getUser() {
+        return user;
     }
 
     public int getViews() {
@@ -65,5 +77,11 @@ public class Post {
         this.content = content;
     }
 
+    public void addComments(String comment, String time) {
+        comments.add(new CommentFeature(comment, time));
+    }
 
+    public ArrayList<CommentFeature> getComments() {
+        return comments;
+    }
 }
