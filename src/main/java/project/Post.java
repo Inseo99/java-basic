@@ -10,16 +10,26 @@ public class Post {
     private int views;
     private ArrayList<CommentFeature> comments;
     private String user;
-    private ArrayList<Like> likes;
+    private int likecount;
 
-    public Post(int id, String title, String content, String time, String user) {
+
+    public Post(int id, String title, String content, int view, String time, String user, int likecount) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.time = time;
-        this.views = 0;
+        this.views = view;
         this.comments = new ArrayList<>();
         this.user = user;
+        this.likecount = likecount;
+    }
+
+    public void setLikecount(int likecount) {
+        this.likecount = likecount;
+    }
+
+    public int getLikecount() {
+        return likecount;
     }
 
     public void setComments(ArrayList<CommentFeature> comments) {
@@ -44,6 +54,14 @@ public class Post {
 
     public void increaseView() {
         views++;
+    }
+
+    public void increaselikecount() {
+        likecount++;
+    }
+
+    public void decreaselikecount() {
+        likecount--;
     }
 
     public String getTime() {
