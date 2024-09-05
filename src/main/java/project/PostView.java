@@ -3,6 +3,8 @@ package project;
 import java.util.ArrayList;
 
 public class PostView {
+    private PostRepository postRepository = new PostRepository();
+
     public void printPostList(ArrayList<Post> targetList) {
         System.out.println("==================");
         for (Post post : targetList) {
@@ -27,5 +29,17 @@ public class PostView {
             System.out.println("좋아요 : ♥ " + post.getLikecount());
         }
         System.out.println("======================");
+    }
+
+    public void postSortPrint() {
+        System.out.println("==========================");
+        for (Post post : postRepository.getPosts()) {
+            System.out.println("번호 : " + post.getId());
+            System.out.println("제목 : " + post.getTitle());
+            System.out.println("작성자 : " + post.getUser());
+            System.out.println("조회수 : " + post.getViews());
+            System.out.println("좋아요 : " + post.getLikecount());
+            System.out.println("==========================");
+        }
     }
 }

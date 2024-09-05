@@ -21,15 +21,14 @@ public class UserController {
         String ID = sc.nextLine();
         System.out.print("비밀번호 : ");
         String password = sc.nextLine();
-        User userId = findUserById(ID);
-        User userPassword = findUserByPassword(password);
-        if (userId.getID().equals(ID) && userPassword.getPassword().equals(password)) {
-            System.out.println(userId.getName() + "님 환영합니다!");
-            currentUser = userId;
 
-            if (userId.getID() == null || userPassword.getPassword() == null) {
-                System.out.println("비밀번호를 틀렸거나 잘못된 회원정보입니다.");
-            }
+        User user = findUserById(ID);
+        if (user == null || !user.getPassword().equals(password)) {
+            System.out.println("비밀번호를 틀렸거나 잘못된 회원정보입니다.");
+        }
+        else {
+            currentUser = user;
+            System.out.println(currentUser.getName() + "님 환영합니다!");
         }
     }
 
@@ -56,16 +55,6 @@ public class UserController {
         }
         return null; // null은 없다라는 의미
     }
-
-    public User findUserByPassword(String password) {
-        for (User user : userRepository.getUsers()) {
-            if (user.getPassword().equals(password)) {
-                return user; // return을 만나면 메서드는 그 즉시 종료
-            }
-        }
-        return null; // null은 없다라는 의미
-    }
-
 
     public String loginWhether() {
         if (currentUser != null) {

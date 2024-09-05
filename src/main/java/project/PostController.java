@@ -42,7 +42,26 @@ public class PostController {
             } else if (sortMethod == 2) {
                 postRepository.getPosts().sort(Comparator.comparingInt(Post::getId).reversed());
             }
-            postRepository.postSortPrint();
+        } else if (postToSort == 2) {
+            if (sortMethod == 1) {
+                Collections.sort(postRepository.getPosts(), new Comparator<Post>() {
+                    @Override
+                    public int compare(Post o1, Post o2) {
+                        return Integer.compare(o1.getViews(), o2.getViews());
+                    }
+                });
+            } else if (sortMethod == 2) {
+                postRepository.getPosts().sort(Comparator.comparingInt(Post::getViews).reversed());
+            }
+        }
+        System.out.println("==========================");
+        for (Post post : postRepository.getPosts()) {
+            System.out.println("번호 : " + post.getId());
+            System.out.println("제목 : " + post.getTitle());
+            System.out.println("작성자 : " + post.getUser());
+            System.out.println("조회수 : " + post.getViews());
+            System.out.println("좋아요 : " + post.getLikecount());
+            System.out.println("==========================");
         }
     }
 
@@ -69,9 +88,9 @@ public class PostController {
         // ==== 요리를 한다음
         if (post == null) {
             System.out.println("존재하지 않는 게시물 번호입니다.");
+            return;
         } else {
             post.increaseView();
-
             // =======
             postView.printPostDetail(post); // 서빙한테 넘겨줌
         }
@@ -102,7 +121,7 @@ public class PostController {
                         post.increaselikecount();
 
 
-                    } else if (userController.currentUser.likewhether) {
+                    } else {
                         System.out.println("해당 게시물의 좋아요를 해제합니다.");
                         userController.currentUser.setLikewhether(false);
                         post.decreaselikecount();
@@ -114,7 +133,11 @@ public class PostController {
                     continue;
                 }
             } else if (feature == 3) {
-                if (Objects.equals(post.getUser(), userController.currentUser.getName())) {
+                if (userController.currentUser == null) {
+                    System.out.println("로그인 상태만 가능합니다.");
+                } else if (!post.getUser().equals(userController.currentUser.getName())) {
+                    System.out.println("자신의 게시물만 수정/삭제 할 수 있습니다.");
+                } else if (post.getUser().equals(userController.currentUser.getName())) {
                     System.out.print("제목 : ");
                     String newtitle = sc.nextLine();
                     post.setTitle(newtitle);
@@ -130,13 +153,14 @@ public class PostController {
                     System.out.println("조회수 : " + post.getViews());
                     System.out.println("작성자 : " + post.getUser());
                     System.out.println("======================");
-                } else {
-                    System.out.println("자신의 게시물만 수정/삭제 할 수 있습니다.");
-                    continue;
                 }
 
             } else if (feature == 4) {
-                if (post.getUser().equals(userController.currentUser.getName())) {
+                if (userController.currentUser == null) {
+                    System.out.println("로그인 상태만 가능합니다.");
+                } else if (!post.getUser().equals(userController.currentUser.getName())) {
+                    System.out.println("자신의 게시물만 수정/삭제 할 수 있습니다.");
+                } else if (post.getUser().equals(userController.currentUser.getName())) {
                     System.out.print("정말 게시물을 삭제하시겠습니까? (y/n) : ");
                     String answer = sc.nextLine();
                     if (answer.equals("y")) {
@@ -149,15 +173,11 @@ public class PostController {
                     } else if (answer.equals("n")) {
                         continue;
                     }
-                } else {
-                    System.out.println("자신의 게시물만 수정/삭제 할 수 있습니다.");
-                    continue;
                 }
             } else {
                 break;
             }
         }
-
     }
 
     public void delete() {
