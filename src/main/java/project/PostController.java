@@ -1,5 +1,6 @@
 package project;
 
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -294,5 +295,26 @@ public class PostController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
         String time = now.format(formatter);
         return time;
+    }
+
+    public void savePostToFile(String postFile) {
+        try (FileOutputStream fos = new FileOutputStream(postFile);
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            oos.writeObject(postRepository.getPosts());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadPostsFromFile(String fileName) {
+        try (FileInputStream fis = new FileInputStream(fileName);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+            ArrayList<Post> posts = (ArrayList<Post>) ois.readObject();
+            for (Post post : posts) {
+                postRepository.save(post);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,6 +1,8 @@
 package project;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     String ID;
     String password;
     String name;

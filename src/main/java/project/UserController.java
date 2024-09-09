@@ -1,5 +1,7 @@
 package project;
 
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserController {
@@ -54,5 +56,26 @@ public class UserController {
             }
         }
         return null; // null은 없다라는 의미
+    }
+
+    public void saveUserToFile(String userFile) {
+        try (FileOutputStream fos = new FileOutputStream(userFile);
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            oos.writeObject(userRepository.getUsers());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadUserFromFile(String userFile) {
+        try (FileInputStream fis = new FileInputStream(userFile);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+            ArrayList<User> users = (ArrayList<User>) ois.readObject();
+            for (User user : users) {
+                userRepository.save(user);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

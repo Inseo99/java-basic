@@ -1,8 +1,9 @@
 package project;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Post {
+public class Post implements Serializable {
     private int id;
     private String title;
     private String content;
