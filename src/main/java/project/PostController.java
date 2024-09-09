@@ -9,20 +9,90 @@ public class PostController {
 
     private PostRepository postRepository = new PostRepository();
     private PostView postView = new PostView();
-    private UserController userController = new UserController();
+    private UserController userController;
 
     private int lastestId = 1; // 가장 최신의 id 값. id값의 고유성을 유지하기 위해 1씩 증가시킬 계획임.
 
     // 값의 초기화는 대부분 생성자에서 해주는 것을 권장합니다.다양한 로직 수행 가능합니다.
-    public PostController() {
+    public PostController(UserController userController) {
 
-        Post p1 = new Post(8, "안녕하세요 반갑습니다.java 공부중이에요.", "냉무", 15, grtCurrentDateTime(), "홍", 13);
-        Post p2 = new Post(3, "java 질문 좀 할게요~", "냉무", 28, grtCurrentDateTime(), "홍", 8);
-        Post p3 = new Post(5, "정처기 따야되나요?", "냉무", 9, grtCurrentDateTime(), "홍", 9);
+        this.userController = userController;
+
+        Post p1 = new Post(1, "안녕하세요 반갑습니다.java 공부중이에요.", "냉무", 15, getCurrentDateTime(), "홍", 13);
+        Post p2 = new Post(2, "java 질문 좀 할게요~", "냉무", 28, getCurrentDateTime(), "홍", 8);
+        Post p3 = new Post(3, "정처기 따야되나요?", "냉무", 9, getCurrentDateTime(), "홍", 9);
 
         postRepository.save(p1);
         postRepository.save(p2);
         postRepository.save(p3);
+    }
+
+    public void page() {
+
+        int currentPage = 1;
+        int pageSlot = 5;
+        int potsSlot = 3;
+        int totalPosts = postRepository.getPosts().size();
+        int totalPage = ((postRepository.getPosts().size() - 1) / potsSlot + 1);
+
+        while (true) {
+            int pageSlotStart = (((currentPage - 1) / pageSlot) * pageSlot) + 1;
+            int pageSlotEnd = Math.min(pageSlotStart + 4, totalPage);
+            int currentPostsStart = (currentPage - 1) * potsSlot;
+            int currentPostsEnd = Math.min(currentPostsStart + potsSlot, totalPosts);
+
+            if (currentPostsStart > totalPosts) {
+                System.out.println("해당 페이지에 게시물이 없습니다.");
+                return;
+            }
+            for (int i = currentPostsStart; i < currentPostsEnd; i++) {
+                Post post = postRepository.getPosts().get(i);
+                System.out.println("==================");
+                System.out.println("번호 : " + post.getId());
+                System.out.println("제목 : " + post.getTitle());
+                System.out.println("작성자 : " + post.getUser());
+                System.out.println("==================");
+            }
+
+            for (int i = pageSlotStart; i <= pageSlotEnd; i++) {
+                if (currentPage == i) {
+                    System.out.print("[" + i + "] ");
+                } else {
+                    System.out.print(i + " ");
+                }
+            }
+            System.out.println(">>");
+            System.out.print("페이징 명령어를 입력해주세요 (1. 이전, 2. 다음, 3. 선택, 4. 뒤로가기) : ");
+            int pagecommand = Integer.parseInt(sc.nextLine());
+            if (pagecommand == 1) {
+                if (totalPage >= currentPage) {
+                    currentPage--;
+                }
+                if (currentPage == 0) {
+                    System.out.println("더이상 페이지가 없습니다.");
+                    return;
+                }
+            } else if (pagecommand == 2) {
+                if (totalPage >= currentPage) {
+                    currentPage++;
+                }
+                if (totalPage < currentPage) {
+                    System.out.println("더이상 페이지가 없습니다.");
+                    return;
+                }
+            } else if (pagecommand == 3) {
+                System.out.print("이동하실 페이지 번호를 입력해주세요 : ");
+                int pagenum = Integer.parseInt(sc.nextLine());
+                if (totalPage < pagenum) {
+                    System.out.println("페이지가 없습니다.");
+                    return;
+                } else {
+                    currentPage = pagenum;
+                }
+            } else if (pagecommand == 4) {
+                break;
+            }
+        }
     }
 
     public void sort() {
@@ -54,15 +124,8 @@ public class PostController {
                 postRepository.getPosts().sort(Comparator.comparingInt(Post::getViews).reversed());
             }
         }
-        System.out.println("==========================");
-        for (Post post : postRepository.getPosts()) {
-            System.out.println("번호 : " + post.getId());
-            System.out.println("제목 : " + post.getTitle());
-            System.out.println("작성자 : " + post.getUser());
-            System.out.println("조회수 : " + post.getViews());
-            System.out.println("좋아요 : " + post.getLikecount());
-            System.out.println("==========================");
-        }
+        ArrayList<Post> posts = postRepository.getPosts();
+        postView.printPostList(posts);
     }
 
     public void list() {
@@ -97,11 +160,11 @@ public class PostController {
 
         while (true) {
             System.out.print("상세보기 기능을 선택해주세요.(1. 댓글 등록, 2. 좋아요, 3. 수정, 4. 삭제, 5. 목록으로) : ");
-            int feature = Integer.parseInt(sc.nextLine());
+            int feature = Integer.parseInt(sc.nextLine().trim());
             if (feature == 1) {
                 System.out.print("댓글 내용 : ");
                 String comment = sc.nextLine();
-                post.addComments(comment, grtCurrentDateTime());
+                post.addComments(comment, getCurrentDateTime());
 
                 System.out.println("댓글이 성공적으로 등록되었습니다.");
 
@@ -145,14 +208,7 @@ public class PostController {
                     String newcontect = sc.nextLine();
                     post.setContent(newcontect);
 
-                    System.out.println("======================");
-                    System.out.println("번호 : " + post.getId());
-                    System.out.println("제목 : " + post.getTitle());
-                    System.out.println("내용 : " + post.getContent());
-                    System.out.println("작성일 : " + post.getTime());
-                    System.out.println("조회수 : " + post.getViews());
-                    System.out.println("작성자 : " + post.getUser());
-                    System.out.println("======================");
+                    postView.printPostDetail(post);
                 }
 
             } else if (feature == 4) {
@@ -217,10 +273,15 @@ public class PostController {
         String title = sc.nextLine();
         System.out.print("게시물 내용을 입력해주세요. : ");
         String content = sc.nextLine();
+        String username;
 
         // 1부터 1씩 증가 -> 고유값 유지하는데 편리
-        String username = userController.loginWhether();
-        Post post = new Post(lastestId, title, content, 0, grtCurrentDateTime(), username, 0);
+        if (userController.currentUser == null) {
+            username = "비로그인 유저";
+        } else {
+            username = userController.currentUser.getName();
+        }
+        Post post = new Post(lastestId, title, content, 0, getCurrentDateTime(), username, 0);
 
         postRepository.save(post);
         System.out.println("게시물이 등록되었습니다.");
@@ -228,7 +289,7 @@ public class PostController {
     }
 
 
-    public String grtCurrentDateTime() {
+    public String getCurrentDateTime() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
         String time = now.format(formatter);

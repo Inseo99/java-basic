@@ -55,11 +55,4 @@ public class UserController {
         }
         return null; // null은 없다라는 의미
     }
-
-    public String loginWhether() {
-        if (currentUser != null) {
-            return currentUser.getName();
-        } else return "비로그인 유저";
-    }
-
 }

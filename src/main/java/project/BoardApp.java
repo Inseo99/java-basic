@@ -10,8 +10,12 @@ public class BoardApp {
 
     //main 메서드와 findPostById 메서드가 같이 사용해야 하므로 main 밖으로 빼주고 static 붙여줌
     private Scanner sc = new Scanner(System.in);
-    private PostController postController = new PostController();
+    private PostController postController;
     private UserController userController = new UserController();
+
+    public BoardApp() {
+        postController = new PostController(userController);
+    }
 
     public void run() {
         while (true) {
@@ -46,6 +50,8 @@ public class BoardApp {
                 userController.login();
             } else if (command.equals("sort")) {
                 postController.sort();
+            } else if (command.equals("page")) {
+                postController.page();
             }
         }
     }
