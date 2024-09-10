@@ -129,7 +129,7 @@ public class PostController {
         postView.printPostList(posts);
     }
 
-    public void list() {
+    public void  list() {
         ArrayList<Post> posts = postRepository.getPosts();
         postView.printPostList(posts);
     }
