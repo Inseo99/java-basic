@@ -23,7 +23,7 @@ public class BoardApp {
                 System.out.print("명령어를 입력해주세요.[");
                 System.out.print(userController.currentUser.getID() + "(" + userController.currentUser.getName() + ")");
                 System.out.print("] : ");
-            } else if (userController.currentUser == null) {
+            } else {
                 System.out.print("명령어를 입력해주세요. : ");
             }
 
@@ -52,6 +52,8 @@ public class BoardApp {
                 postController.sort();
             } else if (command.equals("page")) {
                 postController.page();
+            } else {
+                System.out.println("잘못 입력하였습니다. 다시 입력하십시오");
             }
         }
     }

@@ -9,6 +9,7 @@ public class PostController {
     private Scanner sc = new Scanner(System.in);
     private PostRepository postRepository = new PostRepository();
     private PostView postView = new PostView();
+    private ReplyRepository replyRepository = new ReplyRepository();
 
     int lastid = 1;
 
@@ -40,7 +41,6 @@ public class PostController {
     }
 
     public void update() {
-
         System.out.print("수정할 게시물 번호 : ");
         int targetid = Integer.parseInt(sc.nextLine());
         Post post = postRepository.findById(targetid);
@@ -84,17 +84,20 @@ public class PostController {
             System.out.println("게시물이 없습니다.");
             return;
         } else {
-            post.hit++;
+            post.setHit(post.getHit() + 1);
             postView.printPostDetail(post);
         }
 
+        doDetailProcess(post);
+    }
+
+    public void doDetailProcess(Post post) {
         while (true) {
             System.out.print("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 좋아요, 3. 수정, 4. 삭제, 5. 목록으로");
             int feature = Integer.parseInt(sc.nextLine());
 
             if (feature == 1) {
-                System.out.println("댓글 기능");
-
+                addReply(post);
             } else if (feature == 2) {
                 System.out.println("좋아요 기능");
             } else if (feature == 3) {
@@ -105,7 +108,22 @@ public class PostController {
                 break;
             }
         }
+    }
 
+    public void addReply(Post post) {
+        System.out.print("댓글 내용 : ");
+        String body = sc.nextLine();
+        String redDate = getCurrentDateTime();
+        int postId = post.getId();
+
+        replyRepository.insert(postId, body, redDate);
+
+        System.out.println("댓글이 등록되었습니다.");
+
+        ArrayList<Reply> replies = replyRepository.getRepliesByPostId(postId);
+
+        postView.printPostDetail(post);
+        postView.printReplies(replies);
     }
 
     public void search() {

@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class UserController {
     private Scanner sc = new Scanner(System.in);
     private UserRepository userRepository = new UserRepository();
-    private Userview userview = new Userview();
 
     User currentUser = null;
 

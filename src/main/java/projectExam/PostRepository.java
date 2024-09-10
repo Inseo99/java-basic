@@ -3,7 +3,7 @@ package projectExam;
 import java.util.ArrayList;
 
 public class PostRepository {
-    ArrayList<Post> posts = new ArrayList<>();
+    private ArrayList<Post> posts = new ArrayList<>();
 
     public ArrayList<Post> getPosts() {
         return posts;

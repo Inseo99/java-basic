@@ -1,11 +1,11 @@
 package projectExam;
 
 public class Post {
-    int id;
-    String title;
-    String contect;
-    String time;
-    int hit;
+    private int id;
+    private String title;
+    private String contect;
+    private String time;
+    private int hit;
 
     public Post(int id, String title, String contect, String time, int hit) {
         this.id = id;
@@ -13,6 +13,14 @@ public class Post {
         this.contect = contect;
         this.time = time;
         this.hit = hit;
+    }
+
+    public void setHit(int hit) {
+        this.hit = hit;
+    }
+
+    public int getHit() {
+        return hit;
     }
 
     public void setTime(String time) {

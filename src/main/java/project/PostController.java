@@ -159,6 +159,10 @@ public class PostController {
             postView.printPostDetail(post); // 서빙한테 넘겨줌
         }
 
+        doDetailProcess(post);
+    }
+
+    public void doDetailProcess(Post post) {
         while (true) {
             System.out.print("상세보기 기능을 선택해주세요.(1. 댓글 등록, 2. 좋아요, 3. 수정, 4. 삭제, 5. 목록으로) : ");
             int feature = Integer.parseInt(sc.nextLine().trim());
@@ -170,31 +174,20 @@ public class PostController {
                 System.out.println("댓글이 성공적으로 등록되었습니다.");
 
                 postView.printPostDetail(post);
-                for (CommentFeature commentFeature : post.getComments()) {
-                    System.out.println("========= 댓글 =========");
-                    System.out.println("댓글 내용 : " + commentFeature.getComment());
-                    System.out.println("댓글 작성일 : " + commentFeature.getTime());
-                    System.out.println("======================");
-                }
-
             } else if (feature == 2) {
                 if (userController.currentUser != null) {
                     if (!userController.currentUser.likewhether) {
                         System.out.println("해당 게시물을 좋아합니다.");
                         userController.currentUser.setLikewhether(true);
                         post.increaselikecount();
-
-
                     } else {
                         System.out.println("해당 게시물의 좋아요를 해제합니다.");
                         userController.currentUser.setLikewhether(false);
                         post.decreaselikecount();
                     }
-
                     postView.printPostDetail(post);
                 } else {
                     System.out.println("로그인 상태만 가능합니다.");
-                    continue;
                 }
             } else if (feature == 3) {
                 if (userController.currentUser == null) {
@@ -211,7 +204,6 @@ public class PostController {
 
                     postView.printPostDetail(post);
                 }
-
             } else if (feature == 4) {
                 if (userController.currentUser == null) {
                     System.out.println("로그인 상태만 가능합니다.");
@@ -228,7 +220,7 @@ public class PostController {
                         postView.printPostList(postRepository.getPosts());
                         break;
                     } else if (answer.equals("n")) {
-                        continue;
+                        System.out.println("게시물 삭제를 취소하였습니다.");
                     }
                 }
             } else {
@@ -247,7 +239,6 @@ public class PostController {
         }
         System.out.println(targetId + "번 게시물이 삭제되었습니다.");
         postRepository.delete(post);
-
     }
 
     public void update() {
@@ -293,8 +284,7 @@ public class PostController {
     public String getCurrentDateTime() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
-        String time = now.format(formatter);
-        return time;
+        return now.format(formatter);
     }
 
     public void savePostToFile(String postFile) {
