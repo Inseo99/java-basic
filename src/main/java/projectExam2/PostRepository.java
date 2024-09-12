@@ -1,0 +1,38 @@
+package projectExam2;
+
+import java.util.ArrayList;
+
+public class PostRepository {
+    ArrayList<Post> posts = new ArrayList<>();
+
+    public void save(Post post) {
+        posts.add(post);
+    }
+
+    public ArrayList<Post> getPosts() {
+        return posts;
+    }
+
+    public void delete(Post post) {
+        posts.remove(post);
+    }
+
+    public Post fintById(int targetId) {
+        for (Post post : getPosts()) {
+            if (post.getId() == targetId) {
+                return post;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Post> findByKeyword(String keyword) {
+        ArrayList<Post> searchList = new ArrayList<>();
+        for (Post post : getPosts()) {
+            if (post.getTitle().contains(keyword)) {
+                searchList.add(post);
+            }
+        }
+        return searchList;
+    }
+}

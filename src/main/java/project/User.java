@@ -8,6 +8,8 @@ public class User implements Serializable {
     String name;
     boolean likewhether;
 
+    public User() {}
+
     public User(String ID, String password, String name, boolean likewhetherwhether) {
         this.ID = ID;
         this.password = password;

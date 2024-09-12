@@ -104,4 +104,8 @@ public class Post implements Serializable {
     public ArrayList<CommentFeature> getComments() {
         return comments;
     }
+
+    public Post() {
+
+    }
 }
